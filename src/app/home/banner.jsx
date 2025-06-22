@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { debounce } from 'lodash';
 
 const SvgLoader = ({ onSvgLoaded }) => {
   const [progress, setProgress] = useState(0);
@@ -13,13 +12,14 @@ const SvgLoader = ({ onSvgLoaded }) => {
           clearInterval(interval);
           return 95;
         }
-        return prev + 2; // Smoother, fixed increment
+        return prev + Math.min(Math.random() * 10 + 5, 95 - prev);
       });
-    }, 200); // Less frequent updates
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
 
+  // Update progress to 100% when SVG is loaded
   useEffect(() => {
     if (onSvgLoaded) {
       setProgress(100);
@@ -27,9 +27,9 @@ const SvgLoader = ({ onSvgLoaded }) => {
   }, [onSvgLoaded]);
 
   return (
-    <div className="svg-loader-container" style={{ opacity: progress === 100 ? 0 : 1, transition: 'opacity 0.3s ease' }}>
+    <div className="svg-loader-container">
       <div className="loader-content">
-        <div className={`spinner ${progress === 100 ? 'paused' : ''}`}></div>
+        <div className="spinner"></div>
         <div className="progress-bar">
           <div 
             className="progress-fill" 
@@ -64,11 +64,6 @@ const SvgLoader = ({ onSvgLoaded }) => {
           border-radius: 50%;
           animation: spin 1s linear infinite;
           margin: 0 auto 1rem;
-          will-change: transform;
-        }
-        
-        .spinner.paused {
-          animation-play-state: paused;
         }
         
         @keyframes spin {
@@ -105,7 +100,7 @@ const SvgLoader = ({ onSvgLoaded }) => {
 
 const LargeSvg = dynamic(() => import('./lrge.svg'), {
   ssr: false,
-  loading: () => <SvgLoader />,
+  loading: () => <SvgLoader />
 });
 
 export default function AboutBanner() {
@@ -113,25 +108,15 @@ export default function AboutBanner() {
   const [isSvgLoaded, setIsSvgLoaded] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  // Preload SVG and video
-  useEffect(() => {
-    import('./lrge.svg'); // Preload SVG
-    const link = document.createElement('link');
-    link.rel = 'prefetch';
-    link.href = '/assets/video/office_building_1.mp4';
-    document.head.appendChild(link);
-    return () => link.remove();
-  }, []);
-
   useEffect(() => {
     if (isSvgLoaded && svgRef.current) {
       const clickableElement = svgRef.current.querySelector("#office_building");
       if (clickableElement) {
         clickableElement.style.cursor = "pointer";
-        const handleClick = debounce(() => {
+        const handleClick = () => {
           setIsModalOpen(true);
           console.log("office_building clicked");
-        }, 300);
+        };
         clickableElement.addEventListener("click", handleClick);
 
         return () => {
@@ -148,7 +133,7 @@ export default function AboutBanner() {
   };
 
   return (
-    <div className="banner_svg_vector" style={{ opacity: isSvgLoaded ? 1 : 0, transition: 'opacity 0.3s ease' }}>
+    <div className="banner_svg_vector">
       <LargeSvg 
         className="img-fluid"
         width="100%"
@@ -166,7 +151,7 @@ export default function AboutBanner() {
             <button className="close-button" onClick={closeModal}>
               ×
             </button>
-            <video width="320" height="240" controls autoPlay muted playsInline preload="auto">
+            <video width="320" height="240" controls autoplay muted playsinline>
               <source src="/assets/video/office_building_1.mp4" type="video/mp4" />
               <source src="/assets/video/office_building_1.mp4" type="video/ogg" />
               Your browser does not support the video tag.
@@ -203,13 +188,11 @@ export default function AboutBanner() {
           height: calc(100vh - 64px);
           box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-
         .modal-content video {
           width: 100%;
           height: 100%;
           object-fit: cover;
         }
-
         .close-button {
           position: absolute;
           top: 10px;
