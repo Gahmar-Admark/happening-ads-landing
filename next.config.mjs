@@ -29,6 +29,22 @@ const nextConfig = {
             options: {
               prettier: false,
               svgo: false,
+              svgoConfig: {
+            plugins: [
+              {
+                name: 'removeViewBox',
+                active: false
+              },
+              {
+                name: 'removeDimensions',
+                active: true
+              }
+            ]
+          }
+        }
+      }]
+    })
+  
               // svgoConfig: {
               //   plugins: [
               //     {
@@ -45,14 +61,7 @@ const nextConfig = {
               //     // Fixed: Proper plugin object structure
                  
               //   ],
-              // },
-              // titleProp: true, // Allow adding title prop to SVG components
-            },
-          },
-        ],
-      }
-    );
-
+ 
     // Exclude SVGs from the default file-loader rule to avoid conflicts
     fileLoaderRule.exclude = /\.svg$/i;
 
