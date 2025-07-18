@@ -290,20 +290,19 @@ p {
   border-radius: 20px;
 }
 .service_hover_box {
-  /* visibility: hidden; */
   position: absolute;
-  background: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.3);
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  /* opacity: 0; */
-  transition: 0.3s;
+  opacity: 1;
+  visibility: visible;
+  transition: all 0.3s ease-in-out;
   border-radius: 20px;
 }
-.service_box :hover .service_hover_box {
-  /* opacity: 1;
-  visibility: visible; */
+.service_box:hover .service_hover_box {
+  background: rgba(0, 0, 0, 0.6);
 }
 
 .service_box img {
@@ -329,6 +328,23 @@ p {
   transform: translate(0, -50%);
   width: 100%;
   text-align: center;
+}
+
+.service_caption h5 {
+  color: #fff;
+  opacity: 1;
+  visibility: visible;
+}
+
+.service_caption .card-description {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.service_box:hover .service_caption .card-description {
+  opacity: 1;
+  visibility: visible;
 }
 .page_heading.creative_heading {
   margin-left: 0;
@@ -1233,26 +1249,22 @@ section.stories_slider_section {
   font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
-  visibility: hidden;
-  opacity: 0;
   text-align: center;
   padding-left: 1.5rem;
   padding-right: 1.5rem;
-  
-
-  position: absolute;
-  background: rgba(0, 0, 0, 0.5);
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  transition: 0.3s;
-  border-radius: 20px;
-
+  margin-top: 10px;
 }
-:hover .card-description {
-  visibility: visible;
+
+/* Service card description - hidden by default, shown on hover */
+.service_caption .card-description {
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+}
+
+.service_box:hover .service_caption .card-description {
   opacity: 1;
+  visibility: visible;
 }
 .border-animation-wrapper:hover .service_title_overlay {
   opacity: 0;
