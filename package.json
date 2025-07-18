@@ -24,6 +24,7 @@
     "next": "15.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-img-mapper": "^2.0.0",
     "react-toastify": "^11.0.5",
     "serve": "^14.2.4",
     "swiper": "^11.2.5"

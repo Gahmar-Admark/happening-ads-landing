@@ -3,6 +3,9 @@
   --secondary-color: #FDB92E;
 }
 
+.grayscale-wrapper > img {
+  filter: grayscale(100%) !important;
+}
 
 body {
   font-family: "Poppins", sans-serif!important;
