@@ -1319,19 +1319,19 @@ section.stories_slider_section {
     box-shadow: none;
   }
   30% {
-    width: 140px;
+    width: 50%;
     height: 0;
     border-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   }
   60% {
-    width: 280px;
-    height: 90px;
+    width: 90%;
+    height: 40%;
     box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
   }
   100% {
-    width: 360px;
-    height: 250px;
+    width: 95%;
+    height: 90%;
     border-color: rgba(255, 255, 255, 0.9);
     box-shadow: 0 0 20px rgba(255, 255, 255, 0.3),
       inset 0 0 15px rgba(255, 255, 255, 0.1);
