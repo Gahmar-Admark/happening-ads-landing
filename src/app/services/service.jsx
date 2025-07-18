@@ -6,7 +6,7 @@ import { getServiceCategories } from "../../../services/service.js";
 import { useEffect, useState } from 'react';
 
 // Service Card Component
-const ServiceCard = ({ title, imageSrc, altText, url }) => {
+const ServiceCard = ({ title, imageSrc, altText, url , description }) => {
 
   const linkUrl = url || '#';
   console.log('linkUrl', linkUrl);
@@ -16,7 +16,7 @@ const ServiceCard = ({ title, imageSrc, altText, url }) => {
     <div className="col-md-4 p-4 pt-0 pb-2 service_cntr">
       <div className="service_box h-100 border-0 text-center">
         <Link href={linkUrl}>
-          <div className="service_inner_box overflow-hidden position-relative p-0">
+          <div className="service_inner_box overflow-hidden position-relative p-0 border-animation-wrapper">
             <Image
               src={imageSrc}
               alt={altText}
@@ -27,9 +27,7 @@ const ServiceCard = ({ title, imageSrc, altText, url }) => {
             <div className="service_hover_box">
               <div className="service_caption">
                 <h5 className="card-title" data-aos="fade-up" data-aos-delay="400">{title}</h5>
-                <Link href={linkUrl} className="btn btn-link text-white" data-aos="fade-up" data-aos-delay="600">
-                  Read More
-                </Link>
+                <p className="card-description" data-aos="fade-up" data-aos-delay="600">{description}</p>
               </div>
             </div>
           </div>
@@ -77,6 +75,7 @@ export default function ServicePage() {
                   title={service.title}
                   imageSrc={service.image}
                   altText={'alt_tag'}
+                  description={service.description}
                   url={`/services/store-design/${service._id}`}
                 />
               ))}
