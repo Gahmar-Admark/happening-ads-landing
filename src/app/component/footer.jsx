@@ -20,9 +20,7 @@ import { getSettings } from "../../../services/service.js";
 
 const Footer = () => {
     const pathname = usePathname();
-  if (pathname === '/') {
-    return null;
-  }
+  
   
 
   const [showScrollTop, setShowScrollTop] = useState(false);
@@ -66,7 +64,7 @@ const Footer = () => {
         <div className="row">
           <div className="col-lg-4 col-md-4 col-12 mb-4 mb-md-0">
             <div className="footer_logo">
-              <Image src={settings?.footerLogo || logo} alt="Logo" width={180} height={32} />
+              <img src={settings?.footerLogo || logo} alt="Logo" width={180} height={'auto'} />
               <p className="text-start mt-4">{settings?.about}</p>
             </div>
           </div>

@@ -274,8 +274,8 @@ export default function Navbar() {
                 <Image className="img-fluid"
                   src={settings?.logo || "/assets/images/logo.png"}
                   alt="Ahmar"
-                  width={200}
-                  height={45}
+                  width={350}
+                  height={80}
                 />
               </div>
 
@@ -311,7 +311,7 @@ export default function Navbar() {
               </div>
             </div>
 
-            <span className="pattern_logo"> <Image className="img-fluid" src="/assets/images/pattern_logo.png" alt="Ahmar" width={200} height={45} /></span>
+            {/* <span className="pattern_logo"> <Image className="img-fluid" src="/assets/images/pattern_logo.png" alt="Ahmar" width={200} height={45} /></span> */}
           </div>
           {/* Close button */}
           <div className="text-end">
