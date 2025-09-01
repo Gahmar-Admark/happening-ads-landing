@@ -3,7 +3,7 @@ const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  output: 'standalone',
+  // output: 'standalone',
   webpack(config) {
     // Find the existing rule that handles SVG files (usually handled by Next.js for images)
     const fileLoaderRule = config.module.rules.find((rule) =>
